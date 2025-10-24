@@ -3,6 +3,7 @@ package com.leonardoferrante.gestione_eventi.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,10 +22,11 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/api/auth/**").permitAll() //login registrazione
+                        .requestMatchers(HttpMethod.GET, "/api/eventi/**").hasAnyRole("USER", "ORGANIZZATORE")
+                        .requestMatchers("/api/eventi/**").hasRole("ORGANIZZATORE")
                         .anyRequest().permitAll()
                 )
-                .formLogin(form -> form.disable())
                 .httpBasic(basic -> basic.disable());
         return http.build();
     }

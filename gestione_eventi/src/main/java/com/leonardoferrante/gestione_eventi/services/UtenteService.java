@@ -30,6 +30,13 @@ public class UtenteService implements UserDetailsService {
         return utenteRepository.save(utente);
     }
 
+    //registra organizzatore
+    public Utente registraOrganizzatore(Utente utente) {
+        utente.setPassword(passwordEncoder.encode(utente.getPassword()));
+        utente.setRole(Role.ROLE_ORGANIZZATORE);
+        return utenteRepository.save(utente);
+    }
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Utente utente = utenteRepository.findByEmail(email)
