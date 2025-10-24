@@ -1,10 +1,10 @@
 package com.leonardoferrante.gestione_eventi.repositories;
 
 
-import com.leonardoferrante.gestione_eventi.entities.Utente;
+import com.leonardoferrante.gestione_eventi.entities.Evento;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface utenteRepository extends JpaRepository <Utente, Long> {
+public interface EventoRepository extends JpaRepository<Evento, Long> {
 }
