@@ -25,9 +25,9 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/**").permitAll() //login registrazione
                         .requestMatchers(HttpMethod.GET, "/api/eventi/**").hasAnyRole("USER", "ORGANIZZATORE")
                         .requestMatchers("/api/eventi/**").hasRole("ORGANIZZATORE")
-                        .anyRequest().permitAll()
+                        .anyRequest().authenticated()
                 )
-                .httpBasic(basic -> basic.disable());
+                .httpBasic(basic -> {});
         return http.build();
     }
 }
